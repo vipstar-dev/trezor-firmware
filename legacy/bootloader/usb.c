@@ -19,6 +19,7 @@
 
 #include <libopencm3/stm32/flash.h>
 #include <libopencm3/usb/usbd.h>
+#include <vendor/libopencm3/include/libopencmsis/core_cm3.h>
 
 #include <string.h>
 
@@ -415,9 +416,16 @@ static void rx_callback(usbd_device *dev, uint8_t ep) {
 
     flash_state = STATE_END;
     if (hash_check_ok) {
-      show_unplug("New firmware", "successfully installed.");
+      layoutDialog(&bmp_icon_ok, NULL, NULL, NULL, "New firmware",
+                   "successfully installed.", NULL, "Your Trezor",
+                   "will be restarted.", NULL);
       send_msg_success(dev);
-      shutdown();
+      __disable_irq();
+      // wait 3 seconds
+      for (int i = 0; i < 3000; i++) {
+        delay(120000);
+      }
+      scb_reset_system();
     } else {
       layoutDialog(&bmp_icon_warning, NULL, NULL, NULL, "Firmware installation",
                    "aborted.", NULL, "You need to repeat", "the procedure with",
