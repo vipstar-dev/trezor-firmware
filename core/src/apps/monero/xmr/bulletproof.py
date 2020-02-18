@@ -772,7 +772,7 @@ def _const_vector(val, elems=_BP_N, copy=True):
 
 def _vector_exponent_custom(A, B, a, b, dst=None, a_raw=None, b_raw=None):
     """
-    \sum_{i=0}^{|A|}  a_i A_i + b_i B_i
+    \\sum_{i=0}^{|A|}  a_i A_i + b_i B_i
     """
     dst = _ensure_dst_key(dst)
     crypto.identity_into(_tmp_pt_2)
@@ -823,7 +823,7 @@ def _vector_powers(x, n, dst=None, dynamic=False, **kwargs):
 
 def _vector_power_sum(x, n, dst=None):
     """
-    \sum_{i=0}^{n-1} x^i
+    \\sum_{i=0}^{n-1} x^i
     """
     dst = _ensure_dst_key(dst)
     if n == 0:
@@ -846,7 +846,7 @@ def _vector_power_sum(x, n, dst=None):
 
 def _inner_product(a, b, dst=None):
     """
-    \sum_{i=0}^{|a|} a_i b_i
+    \\sum_{i=0}^{|a|} a_i b_i
     """
     if len(a) != len(b):
         raise ValueError("Incompatible sizes of a and b")
