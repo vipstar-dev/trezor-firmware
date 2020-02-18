@@ -972,7 +972,9 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(
     mod_trezorcrypto_monero_xmr_random_scalar_obj, 0, 1,
     mod_trezorcrypto_monero_xmr_random_scalar);
 
+// clang-format off
 /// def xmr_fast_hash(r: Optional[bytes], buff: bytes, length: int, offset: int) -> bytes:
+// clang-format on
 ///     """
 ///     XMR fast hash
 ///     """
@@ -996,17 +998,20 @@ STATIC mp_obj_t mod_trezorcrypto_monero_xmr_fast_hash(size_t n_args,
   mp_int_t offset = n_args >= 4 ? mp_obj_get_int(args[3]) : 0;
   if (length < 0) length += data.len;
   if (offset < 0) offset += data.len;
-  if (length < 0 || offset < 0 || offset + length > data.len){
+  if (length < 0 || offset < 0 || offset + length > data.len) {
     mp_raise_ValueError("Illegal offset/length");
   }
-  xmr_fast_hash(buff_use, (const char*)data.buf + offset, length);
+  xmr_fast_hash(buff_use, (const char *)data.buf + offset, length);
   return n_args >= 2 ? args[0] : mp_obj_new_bytes(buff, 32);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(
     mod_trezorcrypto_monero_xmr_fast_hash_obj, 1, 4,
     mod_trezorcrypto_monero_xmr_fast_hash);
 
-/// def xmr_hash_to_ec(r: Optional[Ge25519], buff: bytes, length: int, offset: int) -> Ge25519:
+// clang-format off
+/// def xmr_hash_to_ec(r: Optional[Ge25519], buff: bytes, length: int, offset:
+/// int) -> Ge25519:
+// clang-format on
 ///     """
 ///     XMR hashing to EC point
 ///     """
@@ -1021,18 +1026,21 @@ STATIC mp_obj_t mod_trezorcrypto_monero_xmr_hash_to_ec(size_t n_args,
   mp_int_t offset = n_args >= 4 ? mp_obj_get_int(args[3]) : 0;
   if (length < 0) length += data.len;
   if (offset < 0) offset += data.len;
-  if (length < 0 || offset < 0 || offset + length > data.len){
+  if (length < 0 || offset < 0 || offset + length > data.len) {
     mp_raise_ValueError("Illegal offset/length");
   }
 
-  xmr_hash_to_ec(&MP_OBJ_GE25519(res), (const char*)data.buf + offset, length);
+  xmr_hash_to_ec(&MP_OBJ_GE25519(res), (const char *)data.buf + offset, length);
   return res;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(
     mod_trezorcrypto_monero_xmr_hash_to_ec_obj, 1, 4,
     mod_trezorcrypto_monero_xmr_hash_to_ec);
 
-/// def xmr_hash_to_scalar(r: Optional[Sc25519], buff: bytes, length: int, offset: int) -> Sc25519:
+// clang-format off
+/// def xmr_hash_to_scalar(r: Optional[Sc25519], buff: bytes, length: int,
+/// offset: int) -> Sc25519:
+// clang-format on
 ///     """
 ///     XMR hashing to EC scalar
 ///     """
@@ -1047,10 +1055,11 @@ STATIC mp_obj_t mod_trezorcrypto_monero_xmr_hash_to_scalar(
   mp_int_t offset = n_args >= 4 ? mp_obj_get_int(args[3]) : 0;
   if (length < 0) length += data.len;
   if (offset < 0) offset += data.len;
-  if (length < 0 || offset < 0 || offset + length > data.len){
+  if (length < 0 || offset < 0 || offset + length > data.len) {
     mp_raise_ValueError("Illegal offset/length");
   }
-  xmr_hash_to_scalar(MP_OBJ_SCALAR(res), (const char*)data.buf + offset, length);
+  xmr_hash_to_scalar(MP_OBJ_SCALAR(res), (const char *)data.buf + offset,
+                     length);
   return res;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(
