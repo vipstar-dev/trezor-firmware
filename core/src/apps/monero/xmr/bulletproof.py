@@ -737,8 +737,8 @@ class KeyR0(KeyVBase):
         if (
             item == 0 or item != prev
         ):  # if True not present, fails with cross dot product
-            crypto.decodeint_into_noreduce(self.res, self.aR.to(item))  #  aR[i]
-            crypto.sc_add_into(self.res, self.res, self.z)  #  aR[i] + z
+            crypto.decodeint_into_noreduce(self.res, self.aR.to(item))  # aR[i]
+            crypto.sc_add_into(self.res, self.res, self.z)  # aR[i] + z
             crypto.sc_mul_into(self.res, self.res, self.yp)  # (aR[i] + z) * y^i
             crypto.sc_muladd_into(
                 self.res, self.zt, self.p2, self.res
