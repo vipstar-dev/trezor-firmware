@@ -299,14 +299,16 @@ def xmr_fast_hash(r: Optional[bytes], buff: bytes, length: int, offset: int) -> 
 
 
 # extmod/modtrezorcrypto/modtrezorcrypto-monero.h
-def xmr_hash_to_ec(r: Optional[Ge25519], buff: bytes, length: int, offset: int) -> Ge25519:
+def xmr_hash_to_ec(r: Optional[Ge25519], buff: bytes, length: int, offset:
+int) -> Ge25519:
     """
     XMR hashing to EC point
     """
 
 
 # extmod/modtrezorcrypto/modtrezorcrypto-monero.h
-def xmr_hash_to_scalar(r: Optional[Sc25519], buff: bytes, length: int, offset: int) -> Sc25519:
+def xmr_hash_to_scalar(r: Optional[Sc25519], buff: bytes, length: int,
+offset: int) -> Sc25519:
     """
     XMR hashing to EC scalar
     """
