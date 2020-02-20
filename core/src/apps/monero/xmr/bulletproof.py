@@ -314,6 +314,10 @@ class KeyVBase:
         return KeyVSliced(self, start, stop)
 
 
+_CHBITS = const(5)
+_CHSIZE = const(1 << _CHBITS)
+
+
 class KeyV(KeyVBase):
     """
     KeyVector abstraction
@@ -329,8 +333,6 @@ class KeyV(KeyVBase):
     """
 
     __slots__ = ("current_idx", "size", "d", "mv", "const", "cur", "chunked")
-    _CHBITS = const(5)
-    _CHSIZE = const(1 << _CHBITS)
 
     def __init__(self, elems=64, buffer=None, const=False, no_init=False):
         super().__init__(elems)
