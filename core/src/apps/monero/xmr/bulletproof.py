@@ -1279,7 +1279,9 @@ class BulletProofBuilder:
         # Polynomial construction by coefficients
         # l0 = aL - z           r0   = ((aR + z) . ypow) + zt
         # l1 = sL               r1   =   sR      . ypow
-        l0 = KeyVEval(MN, lambda i, d: _sc_sub(d, aL.to(i), None, None, zc))
+        l0 = KeyVEval(
+            MN, lambda i, d: _sc_sub(d, aL.to(i), None, None, zc)  # noqa: F821
+        )
         l1 = sL
         self.gc(13)
 
@@ -1288,7 +1290,9 @@ class BulletProofBuilder:
         # r1_i = s_{Ri} y^{i}
         r0 = KeyR0(MN, N, aR, y, z)
         ypow = KeyVPowers(MN, y, raw=True)
-        r1 = KeyVEval(MN, lambda i, d: _sc_mul(d, sR.to(i), None, ypow[i]))
+        r1 = KeyVEval(
+            MN, lambda i, d: _sc_mul(d, sR.to(i), None, ypow[i])  # noqa: F821
+        )
         del aR
         self.gc(14)
 
