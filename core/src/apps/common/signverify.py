@@ -9,7 +9,6 @@ from apps.common.layout import split_address
 from apps.wallet.sign_tx.writers import write_varint
 
 if False:
-    from typing import List
     from apps.common.coininfo import CoinType
 
 
@@ -28,22 +27,18 @@ def message_digest(coin: CoinType, message: bytes) -> bytes:
     return ret
 
 
-def split_message(message: bytes) -> List[str]:
+def decode_message(message: bytes) -> str:
     try:
-        m = bytes(message).decode()
-        words = m.split(" ")
+        return bytes(message).decode()
     except UnicodeError:
-        m = "hex(%s)" % hexlify(message).decode()
-        words = [m]
-    return words
+        return "hex(%s)" % hexlify(message).decode()
 
 
 async def require_confirm_sign_message(
     ctx: wire.Context, header: str, message: bytes
 ) -> None:
-    message = split_message(message)
-    text = Text(header, new_lines=False)
-    text.normal(*message)
+    text = Text(header)
+    text.normal(decode_message(message))
     await require_confirm(ctx, text)
 
 
@@ -54,6 +49,6 @@ async def require_confirm_verify_message(
     text.mono(*split_address(address))
     await require_confirm(ctx, text)
 
-    text = Text(header, new_lines=False)
-    text.mono(*split_message(message))
+    text = Text(header)
+    text.mono(decode_message(message))
     await require_confirm(ctx, text)
