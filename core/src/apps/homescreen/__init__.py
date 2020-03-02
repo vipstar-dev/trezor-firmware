@@ -22,6 +22,7 @@ if False:
 
 def get_features() -> Features:
     f = Features()
+    f.session_id = cache.get_active_session_id()
     f.vendor = "trezor.io"
     f.language = "en-US"
     f.major_version = utils.VERSION_MAJOR
@@ -77,11 +78,10 @@ def get_features() -> Features:
 
 
 async def handle_Initialize(ctx: wire.Context, msg: Initialize) -> Features:
-    features = get_features()
     if msg.session_id:
         msg.session_id = bytes(msg.session_id)
-    features.session_id = cache.start_session(msg.session_id)
-    return features
+    cache.start_session(msg.session_id)
+    return get_features()
 
 
 async def handle_GetFeatures(ctx: wire.Context, msg: GetFeatures) -> Features:

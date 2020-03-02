@@ -49,6 +49,10 @@ def start_session(received_session_id: bytes = None) -> bytes:
     return _active_session_id
 
 
+def get_active_session_id() -> Optional[bytes]:
+    return _active_session_id
+
+
 def is_session_started() -> bool:
     return _active_session_id is not None
 
